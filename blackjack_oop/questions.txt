@@ -1,1 +1,0 @@
-1)  Why is attr_reader still letting me write to the player balance

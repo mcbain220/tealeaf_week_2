@@ -6,6 +6,7 @@ class Player
   
   @@players = 0
   @@player_busts = 0
+  @@player_blackjacks = 0
   
   attr_accessor :name, :bet_amount, :player_hand, :player_value, :player_stay, :player_balance  
   
@@ -21,7 +22,8 @@ class Player
   end
   
   def player_bet
-    while self.bet_amount == 0 
+    while self.bet_amount == 0
+      puts "#{self.name} balance: #{self.player_balance}" 
       puts "#{self.name}, how much would you like to bet?"
       amount = gets.chomp
       if amount.to_i.is_a?(Integer) && amount.to_i >0 && amount.to_i <= self.player_balance
@@ -66,6 +68,7 @@ class Player
   def player_decision
     if self.player_value == 21 && player_hand.length == 2
       puts "#{self.name} has BLACKJACK!"
+      @@player_blackjacks += 1
     else
       until self.player_value >= 21 || self.player_stay > 0
         puts "#{self.name}, would you like to hit or stay?  (h / s)"
@@ -83,6 +86,14 @@ class Player
     if self.player_value > 21
       @@player_busts += 1
     end
+  end
+  
+  def clear
+    self.player_hand = []
+    self.bet_amount = 0
+    self.player_stay = 0
+    @@player_busts = 0
+    @@player_blackjacks = 0
   end
   
   def self.players

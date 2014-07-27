@@ -35,6 +35,8 @@ class Dealer < Player
   def player_decision
     if @@player_busts == @@players
       puts "All players have busted!  Dealer does nothing."
+    elsif @@player_blackjacks == @@players
+      puts "Player has blackjack!  Dealer does nothing."  
     else
       self.player_hand_value
       puts "#{self.name} turns over a #{self.player_hand.first.first}."
@@ -50,6 +52,11 @@ class Dealer < Player
         puts "#{self.name} has busted!"
       end
     end
+  end
+  
+  def clear
+    self.player_hand = []
+    self.dealer_active = false
   end
   
 end
