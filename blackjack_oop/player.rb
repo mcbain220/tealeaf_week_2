@@ -5,9 +5,9 @@
 class Player
   
   @@players = 0
+  @@player_busts = 0
   
-  attr_accessor :name, :bet_amount, :player_hand, :player_value 
-  attr_reader   :player_balance # I think player_balance may need to be private or protected
+  attr_accessor :name, :bet_amount, :player_hand, :player_value, :player_stay, :player_balance  
   
   def initialize
     puts "What is your name?"
@@ -16,6 +16,7 @@ class Player
     @player_hand = []
     @player_value = 0
     @bet_amount = 0
+    @player_stay = 0
     @@players += 1
   end
   
@@ -39,13 +40,14 @@ class Player
   
   def player_hand_display
     print "#{self.name} hand - "
-  self.player_hand.each do |sub_array|
+    self.player_hand.each do |sub_array|
     print sub_array.first + " / "
   end
   puts "or #{self.player_hand_value}"
   end
   
   def player_hand_value
+    self.player_value = 0
     val_arr = []
     self.player_hand.each do |sub_array|
       val_arr << sub_array.last
@@ -62,23 +64,34 @@ class Player
   end
   
   def player_decision
+    if self.player_value == 21 && player_hand.length == 2
+      puts "#{self.name} has BLACKJACK!"
+    else
+      until self.player_value >= 21 || self.player_stay > 0
+        puts "#{self.name}, would you like to hit or stay?  (h / s)"
+        decision = gets.chomp
+        if decision == 'h'
+          puts "#{self.name} hits!"
+          self.player_deal
+          self.player_hand_display
+        elsif decision == 's'
+          puts "#{self.name} decides to stay!"
+          self.player_stay += 1
+        end
+      end
+    end
+    if self.player_value > 21
+      @@player_busts += 1
+    end
   end
-  
-  def player_resolve
-  end
-  
-  
   
   def self.players
     puts @@players
   end
+
 end
 
-class Dealer < Player
 
-# dealer class should re-write hand display & decision
-  
-end
 
 
 

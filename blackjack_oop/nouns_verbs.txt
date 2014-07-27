@@ -1,0 +1,57 @@
+
+
+Deck
+
+
+
+
+
+Card
+
+
+Hand
+
+
+
+Value
+
+
+
+
+
+Player
+
+
+
+
+Balance
+
+
+
+
+
+Bet
+
+
+
+
+
+
+Dealer
+
+
+
+Table?
+
+                                   DEALER
+                                 A1 B2 C3 D4
+                                  VAL = 
+
+                          |                       |
+                PLAYER 1  |                       |  PLAYER 3
+                          |                       |
+                          |                       |
+                           ----------   ----------
+                            PLAYER 2 --- PLAYER 3
+             
+             
